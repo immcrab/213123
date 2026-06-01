@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A universal API key validator and live playground for major AI providers. Validate keys, test specific models, or bulk test an entire model suite with auto-locking capabilities." />
+    <title>Universal AI Key Validator & Playground</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div class="layout-grid">
+    <div class="container">
+        <h2>Universal AI Key Validator</h2>
+        <p>Paste your keys below to verify them. Active keys will automatically lock down individual models if they throw backend exceptions.</p>
+
+        <div class="input-group">
+            <textarea id="keyInput" placeholder="Paste your API keys here (supports bulk paste, line-by-line, or raw text)"></textarea>
+        </div>
+
+        <span class="model-label">Validation Mode / Targeting:</span>
+        <div class="selector-container" id="providerSelector">
+            <div class="chip active" data-provider="auto">Smart (Auto)</div>
+            <div class="chip" data-provider="openai">OpenAI</div>
+            <div class="chip" data-provider="anthropic">Anthropic</div>
+            <div class="chip" data-provider="deepseek">DeepSeek</div>
+            <div class="chip" data-provider="gemini">Google Gemini</div>
+            <div class="chip" data-provider="mistral">Mistral</div>
+        </div>
+
+        <div class="action-row">
+            <button id="startBtn" onclick="processValidation()">Validate Keys</button>
+            <div class="stats" id="statsArea" style="visibility: hidden;">
+                <div class="stat-item">Total: <span id="statTotal">0</span></div>
+                <div class="stat-item stat-valid">Valid: <span id="statValid">0</span></div>
+                <div class="stat-item stat-invalid">Invalid: <span id="statInvalid">0</span></div>
+            </div>
+        </div>
+
+        <table id="resultsTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Detected Key</th>
+                    <th>Status</th>
+                    <th>Diagnostics / Response</th>
+                </tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h3>Live AI Model Playground</h3>
+        <p>Select a verified working key, execute custom prompts, or run high-velocity testing across entire available model arrays.</p>
+
+        <div class="input-group">
+            <label for="activeKeySelect">Target Verified Key</label>
+            <select id="activeKeySelect" onchange="updateModelDropdown()">
+                <option value="">-- No Active Keys Validated Yet --</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="modelSelect">Target Model Structure</label>
+            <select id="modelSelect"></select>
+        </div>
+
+        <div class="input-group">
+            <label for="promptInput">Test Prompt</label>
+            <input type="text" id="promptInput" value="Return the exact phrase 'System Online' and nothing else.">
+        </div>
+
+        <div class="action-row">
+            <div class="btn-group">
+                <button id="testSingleBtn" onclick="testSingleModel()" disabled>Run Test</button>
+                <button id="testBulkBtn" class="secondary" onclick="bulkTestModels()" disabled>Bulk Test All Models</button>
+            </div>
+        </div>
+
+        <label>System Output logs</label>
+        <div class="playground-output" id="playgroundOutput">Awaiting execution run instructions...</div>
+
+        <label style="margin-top: 20px;">Model Status Registry</label>
+        <div class="model-grid-list" id="modelGridList">
+            <div style="padding: 15px; color: var(--text-muted); font-size: 13px; text-align: center;">No active provider model list loaded.</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedProvider = 'auto';
+    let validatedKeysRegistry = []; // Tracks parsed working instances
+
+    // Static mapping of major production model handles
+    const PROVIDER_MODELS = {
+        openai: ['gpt-4o', 'gpt-4o-mini', 'o1-preview', 'o1-mini', 'gpt-4-turbo'],
+        anthropic: ['claude-3-5-sonnet-latest', 'claude-3-5-haiku-latest', 'claude-3-opus-20240229'],
+        deepseek: ['deepseek-chat', 'deepseek-coder'],
+        gemini: ['gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-2.0-flash-exp'],
+        mistral: ['mistral-large-latest', 'open-mixtral-8x22b', 'codestral-latest']
+    };
+
+    // Tracks broken individual models per key
+    let lockedModelsMap = {}; 
+
+    document.getElementById('providerSelector').addEventListener('click', (e) => {
+        if (e.target.classList.contains('chip')) {
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            e.target.classList.add('active');
+            selectedProvider = e.target.getAttribute('data-provider');
+        }
+    });
+
+    function detectProvider(key) {
+        if (key.startsWith('sk-ant-')) return 'anthropic';
+        if (key.startsWith('AIzaSy')) return 'gemini';
+        if (key.startsWith('sk-')) {
+            // Basic layout optimization heuristics
+            if(key.length > 100) return 'openai';
+            return 'openai'; 
+        }
+        return 'unknown';
+    }
+
+    function maskKey(key) {
+        if (key.length <= 12) return key;
+        return `${key.substring(0, 8)}...${key.substring(key.length - 5)}`;
+    }
+
+    function extractKeys(text) {
+        const regex = /(sk-ant-[a-zA-Z0-9_\-]+|sk-[a-zA-Z0-9_\-]+|AIzaSy[a-zA-Z0-9_\-]+)/g;
+        return text.match(regex) || [];
+    }
+
+    async function testKeyEndpoint(key, provider) {
+        let targetProvider = provider === 'auto' ? detectProvider(key) : provider;
+        if (targetProvider === 'unknown') targetProvider = 'openai';
+
+        try {
+            if (targetProvider === 'openai') return await checkOpenAI(key);
+            if (targetProvider === 'anthropic') return await checkAnthropic(key);
+            if (targetProvider === 'deepseek') return await checkDeepSeek(key);
+            if (targetProvider === 'gemini') return await checkGemini(key);
+            if (targetProvider === 'mistral') return await checkMistral(key);
+        } catch (err) {
+            return { valid: false, provider: targetProvider, details: 'Network architecture block / CORS failed' };
+        }
+    }
+
+    /* Standard Core Endpoints */
+    async function checkOpenAI(key) {
+        const res = await fetch('https://api.openai.com/v1/models', { headers: { 'Authorization': `Bearer ${key}` } });
+        if (res.ok) return { valid: true, provider: 'openai', details: 'Authorized' };
+        const data = await res.json().catch(() => ({}));
+        return { valid: false, provider: 'openai', details: data.error?.message || `HTTP ${res.status}` };
+    }
+
+    async function checkAnthropic(key) {
+        // Simple message proxy payload test
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+            body: JSON.stringify({ model: 'claude-3-5-haiku-latest', max_tokens: 1, messages: [{role: 'user', content: 'hi'}] })
+        });
+        if (res.ok || res.status === 400) return { valid: true, provider: 'anthropic', details: 'Authorized Key' };
+        return { valid: false, provider: 'anthropic', details: `Status ${res.status}` };
+    }
+
+    async function checkDeepSeek(key) {
+        const res = await fetch('https://api.deepseek.com/models', { headers: { 'Authorization': `Bearer ${key}` } });
+        if (res.ok) return { valid: true, provider: 'deepseek', details: 'Authorized' };
+        return { valid: false, provider: 'deepseek', details: `HTTP ${res.status}` };
+    }
+
+    async function checkGemini(key) {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${key}`);
+        if (res.ok) return { valid: true, provider: 'gemini', details: 'Valid Google Key' };
+        return { valid: false, provider: 'gemini', details: 'Unauthorized Key' };
+    }
+
+    async function checkMistral(key) {
+        const res = await fetch('https://api.mistral.ai/v1/models', { headers: { 'Authorization': `Bearer ${key}` } });
+        if (res.ok) return { valid: true, provider: 'mistral', details: 'Authorized' };
+        return { valid: false, provider: 'mistral', details: `HTTP ${res.status}` };
+    }
+
+    // Main bulk execution parsing array loops
+    async function processValidation() {
+        const rawText = document.getElementById('keyInput').value;
+        const keys = [...new Set(extractKeys(rawText))];
+
+        if (keys.length === 0) {
+            alert('No structured API key patterns detected inside input area.');
+            return;
+        }
+
+        const startBtn = document.getElementById('startBtn');
+        const resultsTable = document.getElementById('resultsTable');
+        const resultsBody = document.getElementById('resultsBody');
+        const statsArea = document.getElementById('statsArea');
+
+        startBtn.disabled = true;
+        resultsBody.innerHTML = '';
+        resultsTable.style.display = 'table';
+        statsArea.style.visibility = 'visible';
+
+        document.getElementById('statTotal').innerText = keys.length;
+        let validNum = 0; let invalidNum = 0;
+
+        // Reset runtime storage
+        validatedKeysRegistry = [];
+        lockedModelsMap = {};
+
+        for (let i = 0; i < keys.length; i++) {
+            const currentKey = keys[i];
+            const provEst = selectedProvider === 'auto' ? detectProvider(currentKey) : selectedProvider;
+            
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><span class="key-text">${maskKey(currentKey)}</span><span class="provider-tag">${provEst}</span></td>
+                <td><span id="badge-${i}" class="status-badge badge-checking">Testing...</span></td>
+                <td id="details-${i}" style="color: var(--text-muted)">Connecting...</td>
+            `;
+            resultsBody.appendChild(row);
+
+            const result = await testKeyEndpoint(currentKey, selectedProvider);
+            const badge = document.getElementById(`badge-${i}`);
+            const detailField = document.getElementById(`details-${i}`);
+
+            if (result.valid) {
+                badge.innerText = "Valid";
+                badge.className = "status-badge badge-valid";
+                validNum++;
+                document.getElementById('statValid').innerText = validNum;
+                
+                validatedKeysRegistry.push({ key: currentKey, provider: result.provider });
+            } else {
+                badge.innerText = "Invalid";
+                badge.className = "status-badge badge-invalid";
+                invalidNum++;
+                document.getElementById('statInvalid').innerText = invalidNum;
+            }
+            detailField.innerText = `[${result.provider.toUpperCase()}] ${result.details}`;
+        }
+
+        startBtn.disabled = false;
+        repopulateActiveKeyDropdown();
+    }
+
+    /* Playground Engine Systems */
+    function repopulateActiveKeyDropdown() {
+        const select = document.getElementById('activeKeySelect');
+        select.innerHTML = '';
+
+        if(validatedKeysRegistry.length === 0) {
+            select.innerHTML = '<option value="">-- No Active Keys Validated Yet --</option>';
+            document.getElementById('testSingleBtn').disabled = true;
+            document.getElementById('testBulkBtn').disabled = true;
+            return;
+        }
+
+        validatedKeysRegistry.forEach((item, index) => {
+            const opt = document.createElement('option');
+            opt.value = index;
+            opt.innerText = `${maskKey(item.key)} (${item.provider.toUpperCase()})`;
+            select.appendChild(opt);
+        });
+
+        document.getElementById('testSingleBtn').disabled = false;
+        document.getElementById('testBulkBtn').disabled = false;
+        updateModelDropdown();
+    }
+
+    function updateModelDropdown() {
+        const selectIdx = document.getElementById('activeKeySelect').value;
+        const modelSelect = document.getElementById('modelSelect');
+        modelSelect.innerHTML = '';
+
+        if(selectIdx === "") return;
+        const activeItem = validatedKeysRegistry[selectIdx];
+        const models = PROVIDER_MODELS[activeItem.provider] || [];
+
+        models.forEach(model => {
+            const opt = document.createElement('option');
+            opt.value = model;
+            opt.innerText = model;
+            modelSelect.appendChild(opt);
+        });
+
+        renderModelStatusGrid(activeItem.key, activeItem.provider);
+    }
+
+    function renderModelStatusGrid(key, provider) {
+        const container = document.getElementById('modelGridList');
+        container.innerHTML = '';
+        const models = PROVIDER_MODELS[provider] || [];
+
+        if(!lockedModelsMap[key]) lockedModelsMap[key] = [];
+
+        models.forEach(model => {
+            const isLocked = lockedModelsMap[key].includes(model);
+            const row = document.createElement('div');
+            row.className = `model-row ${isLocked ? 'locked' : ''}`;
+            row.innerHTML = `
+                <span style="font-family: monospace;">${model}</span>
+                <span class="status-badge ${isLocked ? 'badge-locked' : 'badge-valid'}">${isLocked ? 'Locked (Failing)' : 'Available'}</span>
+            `;
+            container.appendChild(row);
+        });
+    }
+
+    // Mock/Live actual API payload call handler
+    async function executeModelCall(key, provider, model, prompt) {
+        try {
+            if (provider === 'openai') {
+                const res = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model: model, messages: [{role: 'user', content: prompt}], max_tokens: 50 })
+                });
+                if(!res.ok) throw new Error(`HTTP Error ${res.status}`);
+                const data = await res.json();
+                return { success: true, response: data.choices[0].message.content };
+            }
+            
+            if (provider === 'anthropic') {
+                const res = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+                    body: JSON.stringify({ model: model, max_tokens: 50, messages: [{role: 'user', content: prompt}] })
+                });
+                if(!res.ok) throw new Error(`HTTP Error ${res.status}`);
+                const data = await res.json();
+                return { success: true, response: data.content[0].text };
+            }
+
+            if (provider === 'deepseek') {
+                const res = await fetch('https://api.deepseek.com/chat/completions', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model: model, messages: [{role: 'user', content: prompt}], max_tokens: 50 })
+                });
+                if(!res.ok) throw new Error(`HTTP Error ${res.status}`);
+                const data = await res.json();
+                return { success: true, response: data.choices[0].message.content };
+            }
+
+            if (provider === 'gemini') {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                if(!res.ok) throw new Error(`HTTP Error ${res.status}`);
+                const data = await res.json();
+                return { success: true, response: data.candidates[0].content.parts[0].text };
+            }
+
+            if (provider === 'mistral') {
+                const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model: model, messages: [{role: 'user', content: prompt}], max_tokens: 50 })
+                });
+                if(!res.ok) throw new Error(`HTTP Error ${res.status}`);
+                const data = await res.json();
+                return { success: true, response: data.choices[0].message.content };
+            }
+        } catch(e) {
+            return { success: false, response: e.message };
+        }
+    }
+
+    async function testSingleModel() {
+        const selectIdx = document.getElementById('activeKeySelect').value;
+        if(selectIdx === "") return;
+
+        const activeItem = validatedKeysRegistry[selectIdx];
+        const targetModel = document.getElementById('modelSelect').value;
+        const prompt = document.getElementById('promptInput').value;
+        const outputBox = document.getElementById('playgroundOutput');
+
+        outputBox.innerText = `Dispatching dynamic request to [${targetModel}]...`;
+
+        const outcome = await executeModelCall(activeItem.key, activeItem.provider, targetModel, prompt);
+        
+        if(outcome.success) {
+            outputBox.innerText = `[SUCCESS - ${targetModel}]:\n${outcome.response}`;
+        } else {
+            outputBox.innerText = `[FAILED - Locking Model]: ${outcome.response}`;
+            if(!lockedModelsMap[activeItem.key].includes(targetModel)) {
+                lockedModelsMap[activeItem.key].push(targetModel);
+            }
+            renderModelStatusGrid(activeItem.key, activeItem.provider);
+        }
+    }
+
+    async function bulkTestModels() {
+        const selectIdx = document.getElementById('activeKeySelect').value;
+        if(selectIdx === "") return;
+
+        const activeItem = validatedKeysRegistry[selectIdx];
+        const models = PROVIDER_MODELS[activeItem.provider] || [];
+        const prompt = document.getElementById('promptInput').value;
+        const outputBox = document.getElementById('playgroundOutput');
+
+        outputBox.innerText = "Beginning processing pipeline run loop across full engine array...\n";
+
+        for(let m of models) {
+            outputBox.innerText += `\nTesting deployment payload: ${m}...`;
+            const outcome = await executeModelCall(activeItem.key, activeItem.provider, m, prompt);
+            
+            if(outcome.success) {
+                outputBox.innerText += ` OK.`;
+            } else {
+                outputBox.innerText += ` FAILED (${outcome.response}). Locking.`;
+                if(!lockedModelsMap[activeItem.key].includes(m)) {
+                    lockedModelsMap[activeItem.key].push(m);
+                }
+            }
+            renderModelStatusGrid(activeItem.key, activeItem.provider);
+        }
+        outputBox.innerText += `\n\n[Pipeline Complete] Checked all registered vectors.`;
+    }
+</script>
+
+</body>
+</html>

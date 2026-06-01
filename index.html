@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="theme-color" content="#06060a" />
+<title>Nexus Web AI builder | Build modern websites with AI</title>
+<meta name="description" content="A compelling, high-converting sentence explaining exactly what value your site provides to visitors. Click to explore our solutions.">
+<meta name="robots" content="index, follow">
+<meta property="og:site_name" content="BrandName Studio">
+<meta property="og:type" content="website">
+
+<meta property="og:url" content="https://nexus.owenlee.xyz/">
+
+<meta property="og:title" content="Transform Your Workflow with Nexus Web AI Studio">
+
+<meta property="og:description" content="Discover the tools and framework configurations built to optimize efficiency and upgrade interface scalability.">
+
+<meta property="og:image" content="https://nexus.owenlee.xyz/assets/logo.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A sleek visual preview showcase of the Nexus Web AI software dashboard interface.">
+<link rel="icon" href="assets/logo.png" />
+<meta name="description" content="Nexus Web AI builder lets you build modern websites and apps by chatting with AI. Login, deploy, and ship faster." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TFZPC07B0B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TFZPC07B0B');
+</script>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-mark">
+      <img src="assets/logo.png" alt="Nexus logo" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" />
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#showcase">Showcase</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#">Enterprise</a>
+    <a href="#">Docs</a>
+  </div>
+  <div class="nav-cta" id="navCta">
+    <button class="btn btn-ghost" onclick="openModal('login')">Sign in</button>
+    <button class="btn btn-primary" onclick="openModal('signup')">Get started</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow"><span class="dot"></span>Beta Mode</div>
+  <h1>Build your <span class="serif">DREAMS</span></h1>
+  <p class="sub">Nexus, Build Anything.</p>
+
+  <div class="prompt-wrap">
+    <div class="prompt-inner">
+      <textarea id="promptArea" placeholder="Describe the site you want to build…"></textarea>
+      <div class="prompt-tools">
+        <div class="chip-row">
+          <button class="chip">＋ Attach</button>
+          <button class="chip">◇ Templates</button>
+          <button class="chip">◎ Public</button>
+        </div>
+        <button class="send-btn" onclick="submitToBuilder()" aria-label="Generate">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="suggestions">
+    <button class="suggestion" onclick="fillPrompt('A SaaS landing page for an AI scheduling assistant')">SaaS landing page</button>
+    <button class="suggestion" onclick="fillPrompt('A portfolio site for an interior designer')">Designer portfolio</button>
+    <button class="suggestion" onclick="fillPrompt('An e-commerce store for handmade ceramics')">Ceramics shop</button>
+    <button class="suggestion" onclick="fillPrompt('A community forum with login and posts')">Community forum</button>
+  </div>
+</header>
+
+<section id="features">
+  <div class="section-head">
+    <div class="section-eyebrow">Platform</div>
+    <h2>Everything you need to <span class="serif">ship.</span></h2>
+    <p class="section-sub">From the first prompt to a live URL with paying customers. No setup, no glue code, no compromises.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5 12 2"/></svg></div>
+      <h3>AI that ships</h3>
+      <p>Multi-step agents that plan, build, and self-correct until your site actually works in production.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>Auth, baked in</h3>
+      <p>Email, Google, magic links — wire up sign-in for your users in a single sentence.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
+      <h3>Managed database</h3>
+      <p>A serverless Postgres comes with every project. Query it from the chat, no migrations required.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <h3>One-click deploy</h3>
+      <p>Every change goes live on a global edge network in under three seconds. Custom domains included.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      <h3>Your code, your repo</h3>
+      <p>Two-way GitHub sync. Edit in Nexus, edit in your IDE — both stay in perfect lockstep.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20"/><path d="M12 2a15 15 0 0 0 0 20"/></svg></div>
+      <h3>Built for teams</h3>
+      <p>Real-time multiplayer editing, granular roles, SSO, and audit logs. Enterprise from day one.</p>
+    </div>
+  </div>
+</section>
+
+<section id="showcase">
+  <div class="section-head">
+    <div class="section-eyebrow">Showcase</div>
+    <h2>Made with <span class="serif">Nexus.</span></h2>
+    <p class="section-sub">A glimpse of what teams shipped last week — from prompt to production in hours, not months.</p>
+  </div>
+
+  <div class="showcase">
+    <div class="show-card"><div class="thumb"></div><div class="label"><strong></strong><span></span></div></div>
+    <div class="show-card"><div class="thumb"></div><div class="label"><strong></strong><span></span></div></div>
+    <div class="show-card"><div class="thumb"></div><div class="label"><strong></strong><span></span></div></div>
+    <div class="show-card"><div class="thumb"></div><div class="label"><strong></strong><span></span></div></div>
+    <div class="show-card"><div class="thumb"></div><div class="label"><strong></strong><span></span></div></div>
+    <div class="show-card"><div class="thumb"></div><div class="label"><strong></strong><span></span></div></div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="section-head">
+    <div class="section-eyebrow">Pricing</div>
+    <h2>Plans for every <span class="serif">ambition.</span></h2>
+    <p class="section-sub">Start free. Upgrade when your project starts paying for itself.</p>
+  </div>
+
+  <div class="pricing">
+    <div class="price-card">
+      <div class="tier">Free</div>
+      <div class="price">$0<span> / month</span></div>
+      <p class="price-desc">For tinkerers and weekend ideas.</p>
+      <ul class="price-features">
+        <li>5 daily AI generations</li>
+        <li>1 deployed project</li>
+        <li>Community support</li>
+        <li>Nexus subdomain</li>
+      </ul>
+      <button class="btn btn-outline btn-lg" style="width:100%" onclick="openModal('signup')">Start free</button>
+    </div>
+
+    <div class="price-card featured">
+      <div class="tier">Pro</div>
+      <div class="price">$25<span> / month</span></div>
+      <p class="price-desc">For founders shipping real product.</p>
+      <ul class="price-features">
+        <li>Unlimited AI generations</li>
+        <li>Unlimited projects</li>
+        <li>Custom domains &amp; SSL</li>
+        <li>GitHub two-way sync</li>
+        <li>Priority support</li>
+      </ul>
+      <button class="btn btn-primary btn-lg" style="width:100%" onclick="openModal('signup')">Start 14-day trial</button>
+    </div>
+
+    <div class="price-card">
+      <div class="tier">Enterprise</div>
+      <div class="price">Custom</div>
+      <p class="price-desc">For teams with audit and security needs.</p>
+      <ul class="price-features">
+        <li>SSO &amp; SCIM</li>
+        <li>Dedicated capacity</li>
+        <li>SOC 2 &amp; HIPAA</li>
+        <li>Solutions engineer</li>
+      </ul>
+      <button class="btn btn-outline btn-lg" style="width:100%">Contact sales</button>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <div class="cta-box">
+    <div class="section-eyebrow">Start building</div>
+    <h2>Your next site is <span class="serif">one prompt away.</span></h2>
+    <p class="section-sub" style="margin-top:16px;margin-bottom:32px">Be one of the first to build with Nexus.</p>
+    <button class="btn btn-primary btn-lg" onclick="openModal('signup')">Get started — it's free</button>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-wrap">
+    <div>
+      <a href="#" class="logo">
+    <div class="logo-mark">
+      <img src="assets/logo.png" alt="Nexus logo" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" />
+    </div>
+  </a>
+      <p style="max-width:280px;line-height:1.55;margin-top:14px">Web development, reimagined. Build, deploy, and scale modern websites with a single conversation.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#showcase">Showcase</a></li><li><a href="#">Changelog</a></li></ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Blog</a></li><li><a href="#">Contact</a></li></ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul><li><a href="#">Docs</a></li><li><a href="#">Templates</a></li><li><a href="#">Community</a></li><li><a href="#">Support</a></li></ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© 2026 Nexus Web Development. All rights reserved.</div>
+    <div>Build Anything.</div>
+  </div>
+
+  <div class="sidebar-footer">
+          <a href="legal/" class="legal-link-btn" target="_blank">
+            Legal & Privacy Policy
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-top:-1px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        </div>
+</footer>
+
+<div class="modal-overlay" id="authModal" onclick="if(event.target===this) closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-logo">N</div>
+    <h3 id="modalTitle">Create your account</h3>
+    <p class="muted" id="modalSub">Start building in under a minute. No credit card required.</p>
+
+    <form id="authForm" onsubmit="event.preventDefault(); handleAuth();">
+      <div class="field" id="nameField">
+        <label>Full name</label>
+        <input id="authName" type="text" placeholder="Jane Doe" />
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input id="authEmail" type="email" placeholder="you@company.com" required />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input id="authPassword" type="password" placeholder="••••••••" required minlength="6" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" id="modalSubmit">Create account</button>
+      <p id="authError" style="color:#ff7a7a;font-size:13px;margin-top:10px;min-height:18px;text-align:center"></p>
+    </form>
+
+    <div class="divider">or continue with</div>
+    <div class="social-row">
+      <button class="social-btn" id="googleBtn" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#fff" d="M21.35 11.1H12v2.96h5.36c-.23 1.42-1.66 4.16-5.36 4.16-3.23 0-5.86-2.67-5.86-5.97s2.63-5.97 5.86-5.97c1.84 0 3.07.78 3.78 1.45l2.57-2.48C16.78 3.78 14.6 2.8 12 2.8 6.93 2.8 2.85 6.88 2.85 11.95S6.93 21.1 12 21.1c6.92 0 9.5-4.86 9.5-7.4 0-.5-.05-.88-.15-1.6z"/></svg>
+        Continue with Google
+      </button>
+      <button class="social-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 12.5c0-2.6 2.1-3.9 2.2-3.9-1.2-1.7-3-2-3.7-2-1.6-.2-3 .9-3.8.9s-2-.9-3.3-.9c-1.7 0-3.2 1-4.1 2.5-1.7 3-.4 7.4 1.3 9.8.8 1.2 1.8 2.5 3.1 2.5 1.2 0 1.7-.8 3.2-.8s1.9.8 3.3.8c1.4 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.5-1-2.5-3.7zM15 4.7c.7-.8 1.1-1.9 1-3-1 .04-2.1.66-2.8 1.46-.6.7-1.2 1.8-1 2.9 1.1.1 2.2-.55 2.8-1.36z"/></svg>
+        Continue with Apple
+      </button>
+      <button class="social-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+        Continue with GitHub
+      </button>
+    </div>
+
+    <div class="modal-switch" id="modalSwitch">
+      Already have an account? <a onclick="switchMode('login')">Sign in</a>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+    signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, updateProfile
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD5xI8GOG1lEKXBCunwq6qekg3QQOSijZ8",
+    authDomain: "sitedropio.firebaseapp.com",
+    databaseURL: "https://sitedropio-rtdb.firebaseio.com",
+    projectId: "sitedropio",
+    storageBucket: "sitedropio.firebasestorage.app",
+    messagingSenderId: "950561906473",
+    appId: "1:950561906473:web:45822a85f188c28b20e138",
+    measurementId: "G-BY119K5RS2"
+  };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const googleProvider = new GoogleAuthProvider();
+
+  let authMode = 'signup';
+  const modal = document.getElementById('authModal');
+  const errEl = () => document.getElementById('authError');
+
+  window.openModal = function(mode){
+    authMode = mode; applyMode();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    errEl().textContent = '';
+  };
+  window.closeModal = function(){
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+  window.switchMode = function(mode){ authMode = mode; applyMode(); errEl().textContent=''; };
+
+  function applyMode(){
+    const isSignup = authMode === 'signup';
+    document.getElementById('modalTitle').textContent = isSignup ? 'Create your account' : 'Welcome back';
+    document.getElementById('modalSub').textContent = isSignup ? 'Start building in under a minute. No credit card required.' : 'Sign in to continue building with Nexus.';
+    document.getElementById('modalSubmit').textContent = isSignup ? 'Create account' : 'Sign in';
+    document.getElementById('nameField').style.display = isSignup ? 'flex' : 'none';
+    document.getElementById('modalSwitch').innerHTML = isSignup
+      ? 'Already have an account? <a onclick="switchMode(\'login\')">Sign in</a>'
+      : 'New to Nexus? <a onclick="switchMode(\'signup\')">Create an account</a>';
+  }
+
+  window.handleAuth = async function(){
+    const btn = document.getElementById('modalSubmit');
+    const email = document.getElementById('authEmail').value.trim();
+    const password = document.getElementById('authPassword').value;
+    const name = document.getElementById('authName').value.trim();
+    errEl().textContent = '';
+    const original = btn.textContent;
+    btn.textContent = 'Just a moment…'; btn.disabled = true;
+    try {
+      if (authMode === 'signup') {
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
+        if (name) await updateProfile(cred.user, { displayName: name });
+      } else {
+        await signInWithEmailAndPassword(auth, email, password);
+      }
+      btn.textContent = '✓ Success';
+      setTimeout(closeModal, 600);
+    } catch (e) {
+      console.error(e);
+      errEl().textContent = friendlyError(e);
+      btn.textContent = original;
+    } finally {
+      btn.disabled = false;
+    }
+  };
+
+  document.getElementById('googleBtn').addEventListener('click', async () => {
+    errEl().textContent = '';
+    try {
+      await signInWithPopup(auth, googleProvider);
+      closeModal();
+    } catch (e) {
+      console.error(e);
+      errEl().textContent = friendlyError(e);
+    }
+  });
+
+  function friendlyError(e){
+    const c = (e && e.code) || '';
+    if (c.includes('email-already-in-use')) return 'That email is already registered. Try signing in instead.';
+    if (c.includes('invalid-email')) return 'That email address looks invalid.';
+    if (c.includes('weak-password')) return 'Password must be at least 6 characters.';
+    if (c.includes('invalid-credential') || c.includes('wrong-password') || c.includes('user-not-found')) return 'Email or password is incorrect.';
+    if (c.includes('popup-closed-by-user')) return 'Sign-in popup was closed.';
+    if (c.includes('unauthorized-domain')) return 'This domain isn\'t authorized in Firebase Auth settings.';
+    return (e && e.message) || 'Something went wrong. Please try again.';
+  }
+
+  onAuthStateChanged(auth, (user) => {
+    const nav = document.getElementById('navCta');
+    if (user) {
+      const label = user.displayName || user.email || 'Account';
+      const initial = (label[0] || 'U').toUpperCase();
+      nav.innerHTML = `
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--grad);display:grid;place-items:center;color:#0a0a0f;font-weight:700;font-size:13px">${initial}</div>
+          <span style="font-size:14px;color:var(--text);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${label}</span>
+          <button class="btn btn-outline" id="signOutBtn">Sign out</button>
+        </div>`;
+      document.getElementById('signOutBtn').addEventListener('click', () => signOut(auth));
+    } else {
+  nav.innerHTML = `
+    <button class=\"btn btn-ghost\" onclick=\"openModal('login')\">Sign in/Sign up</button>
+    <a href="https://pay.nexus.owenlee.xyz" class=\"btn btn-primary\">Donate</a>
+    <a href="https://check.nexus.owenlee.xyz" class=\"btn btn-primary\">Api Key Checker</a>`;
+}
+  });
+
+  window.fillPrompt = function(text){
+    const ta = document.getElementById('promptArea');
+    ta.value = text; ta.focus();
+  };
+
+  window.submitToBuilder = function() {
+    const ta = document.getElementById('promptArea');
+    if (ta && ta.value.trim()) {
+      window.location.href = `app/?prompt=${encodeURIComponent(ta.value.trim())}`;
+    }
+  };
+
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+</script>
+
+</body>
+</html>

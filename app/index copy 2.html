@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="theme-color" content="#06060a" />
+<title>ScribbleAI builder | Build modern websites with AI</title>
+<meta name="description" content="A compelling, high-converting sentence explaining exactly what value your site provides to visitors. Click to explore our solutions.">
+<meta name="robots" content="index, follow">
+<meta property="og:site_name" content="BrandName Studio">
+<meta property="og:type" content="website">
+
+<meta property="og:url" content="https://scribbleai.dev/">
+
+<meta property="og:title" content="Transform Your Workflow with ScribbleAI Studio">
+
+<meta property="og:description" content="Discover the tools and framework configurations built to optimize efficiency and upgrade interface scalability.">
+
+<meta property="og:image" content="https://scribbleai.dev/assets/logo.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A sleek visual preview showcase of the ScribbleAI Web AI software dashboard interface.">
+<link rel="stylesheet" href="../assets/style.css" />
+    <link rel="icon" href="/assets/logo.png" />
+<meta name="description" content="ScribbleAI builder lets you build modern websites and apps by chatting with AI. Login, deploy, and ship faster." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TFZPC07B0B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TFZPC07B0B');
+</script>
+
+</head>
+<body class="page-app-copy2">
+
+<header>
+  <a href="../index.html" class="logo">
+    <div class="logo-mark">
+      <img src="../assets/logo.png" alt="ScribbleAI logo" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" />
+    </div>
+  </a>
+  <div class="header-actions">
+    <a href="../projects/" class="projects-nav-btn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+      Projects
+    </a>
+    <div class="status-badge">
+      <span class="pulse-dot"></span> <span id="runtimeStatus">Workspace Active</span>
+    </div>
+    <button class="icon-btn" onclick="toggleSettingsModal(true)" title="Workspace Settings">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+    </button>
+  </div>
+</header>
+
+<div class="workspace-container">
+  <aside class="chat-sidebar" id="sidebarContainer">
+    <div class="panel-scroller">
+      <div class="panel-row">
+        <span>Active: <strong id="lblActiveNode">ScribbleAI</strong></span>
+        <span>Tokens: <strong id="lblLastTokens">0</strong></span>
+      </div>
+      <div class="attachments-panel">
+        <div class="attachments-header">Attachments</div>
+        <div class="attachments-actions">
+          <button class="action-btn" type="button" onclick="document.getElementById('attachmentUpload').click()">Add Files</button>
+          <span class="attachments-note">HTML, CSS, JS, images</span>
+        </div>
+        <input id="attachmentUpload" type="file" multiple accept=".html,.css,.js,image/*" style="display:none;" onchange="handleAttachmentFiles(this.files)" />
+        <div id="attachmentList" class="attachment-list">No attachments yet.</div>
+      </div>
+    </div>
+
+    <div class="history-container" id="chatHistory">
+      <div class="message assistant">
+        Welcome to ScribbleAI! Describe your site, and I'll generate the code for you. You can also ask me to design variations or optimize your existing structure. Let's build something amazing together!
+      </div>
+    </div>
+
+    <div class="input-container">
+      <div class="input-wrap">
+        <textarea id="workspaceInput" placeholder="Describe layout changes or ask to design structural variants..."></textarea>
+        <div class="input-action-row">
+          <div>
+            <span class="counter-display" id="messageCounterLabel">Credits: 20.0 / 20 · Messages: 0 / 20</span>
+            <span class="counter-display" id="dailyResetLabel">Resets in: 24:00:00</span>
+          </div>
+          <button class="action-btn" id="btnSubmitPrompt" onclick="handlePromptSubmission()">
+            <span id="submitBtnLabel">Build Changes</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="resizer" id="dragSplitResizer"></div>
+
+  <main class="preview-canvas">
+    <div class="canvas-header">
+      <div class="header-left">
+        <button class="tab-btn active" id="btnTabPreview" onclick="toggleCanvasTab('preview')">Live Canvas</button>
+        <button class="tab-btn" id="btnTabCode" onclick="toggleCanvasTab('code')">Code Architecture</button>
+        <button class="tab-btn" id="btnTabEdit" onclick="toggleCanvasTab('edit')">Edit Layout</button>
+      </div>
+      <div class="header-right">
+        <button class="util-btn active" id="presetDesktop" onclick="setCanvasViewport('desktop')">Desktop</button>
+        <button class="util-btn" id="presetTablet" onclick="setCanvasViewport('tablet')">Tablet</button>
+        <button class="util-btn" id="presetPhone" onclick="setCanvasViewport('phone')">Mobile</button>
+        <div style="width: 1px; height: 12px; background: var(--border); margin: 0 2px;"></div>
+        <button class="util-btn text-accent" onclick="triggerCodeDownload()" style="color: var(--accent);">Download</button>
+      </div>
+    </div>
+
+    <div class="view-viewport">
+      <div class="initial-load-overlay" id="globalWorkspaceLoader">
+        <div class="spinner"></div>
+        <h3 style="font-size: 14px; margin-bottom: 4px;">AI Engine Executing</h3>
+        <p id="agentLoaderMessage" style="color: var(--muted); font-size: 11px;">Synthesizing interface parameters...</p>
+      </div>
+
+      <div class="view-layer active" id="layerPreview">
+        <div class="viewport-wrapper preset-desktop" id="viewportWrapper">
+          <iframe id="previewFrame" class="canvas-frame" title="Application Workspace Output"></iframe>
+          <div class="generation-overlay" id="generationOverlay" style="display:none;">
+            <div class="generation-box">
+              <div class="generation-title">Did you know?</div>
+              <div class="generation-tip" id="generationTipText">You can change colors with a single prompt.</div>
+              <div class="progress-bar-background">
+                <div class="progress-bar-fill" id="generationProgressFill"></div>
+              </div>
+              <div class="generation-percent" id="generationProgressLabel">0%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="view-layer code-view-container" id="layerCode">
+        <textarea id="codeAreaView" class="code-area" readonly></textarea>
+      </div>
+
+      <div class="view-layer" id="layerEdit">
+        <div class="edit-canvas-shell">
+          <div class="edit-sidebar">
+            <div class="settings-title">Element Controls</div>
+            <div class="cred-field">
+              <label>Selected Element</label>
+              <div id="selectedElementLabel" style="color: var(--text); min-height: 24px;">None selected</div>
+            </div>
+            <div class="cred-field">
+              <label>Text</label>
+              <input id="editTextInput" type="text" class="styled-select" placeholder="Edit text content" />
+            </div>
+            <div class="cred-field">
+              <label>Text Color</label>
+              <input id="editTextColor" type="color" value="#ffffff" style="width:100%; height: 36px;" />
+            </div>
+            <div class="cred-field">
+              <label>Background Color</label>
+              <input id="editBackgroundColor" type="color" value="#000000" style="width:100%; height: 36px;" />
+            </div>
+            <div class="cred-field">
+              <label>Height (px)</label>
+              <input id="editHeightInput" type="number" class="styled-select" placeholder="auto" />
+            </div>
+            <div class="cred-field">
+              <label>Transform</label>
+              <input id="editTransformInput" type="text" class="styled-select" placeholder="rotate(0deg) scale(1)" />
+            </div>
+            <div class="cred-field" style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="action-btn" type="button" onclick="saveEditChanges()">Save Changes</button>
+              <button class="action-btn" type="button" onclick="resetEditSelection()" style="background: rgba(255,255,255,0.08);">Reset</button>
+            </div>
+            <div class="cred-field">
+              <div style="font-size: 12px; color: var(--muted);">Click any element in the preview to select it for editing. Use the controls above to adjust text, colors, height, and transform.</div>
+            </div>
+          </div>
+          <div class="edit-preview-shell">
+            <div class="edit-instructions">Click inside the preview to select an element for live editing.</div>
+            <iframe id="editFrame" class="canvas-frame" title="Edit Workspace Output"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">Workspace Adjustments</div>
+      <button class="close-btn" onclick="toggleSettingsModal(false)">&times;</button>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-title">Theme & Layout Appearance</div>
+      <div class="cred-field">
+        <label>Visual Style Presets</label>
+        <select id="themeStyleSelect" class="styled-select" onchange="applyVisualConfigurations()">
+          <option value="dark">Dark Space (Default)</option>
+          <option value="light">Light Minimal</option>
+          <option value="hacker">Hacker Terminal</option>
+        </select>
+      </div>
+      <div class="cred-field">
+        <label>Typography Sizing</label>
+        <select id="textSizeSelect" class="styled-select" onchange="applyVisualConfigurations()">
+          <option value="small">Compact Workspace</option>
+          <option value="medium" selected>Standard Display</option>
+          <option value="large">Spacious Mode</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-title">Usage Restraints Configuration</div>
+      <div class="cred-field">
+        <label><span>Daily message cap</span> <span id="lblSliderLimitValue" style="color: var(--accent); font-weight: 700;">20 Messages</span></label>
+        <input type="range" id="maxMessagesLimitSlider" class="slider-element" min="5" max="20" value="20" oninput="updateMaxAllocationParameters()" />
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-title">AI Endpoint Infrastructure</div>
+      <div class="cred-field">
+        <label>Provider Hub</label>
+        <select id="providerSelect" class="styled-select" onchange="handleEndpointRotation()">
+          <option value="github">GitHub Models API Hub</option>
+          <option value="groq">Groq Cloud System (Fast Execution)</option>
+          <option value="openai">OpenAI / ChatGPT</option>
+          <option value="anthropic">Anthropic Claude</option>
+          <option value="gemini">Google Gemini</option>
+        </select>
+      </div>
+      <div class="cred-field">
+        <label>Active Architecture Model</label>
+        <select id="modelSelect" class="styled-select"></select>
+      </div>
+      <div class="cred-field">
+        <button class="action-btn" type="button" onclick="openProviderModal()" style="width:100%; justify-content:center;">Add New Provider</button>
+      </div>
+      <div class="cred-field" id="providerGuidanceBox" style="background: rgba(255,255,255,0.04); border-radius: 10px; padding: 10px; color: var(--muted); font-size: 12px; line-height: 1.5;">
+        Select a provider to see setup instructions.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="providerModal">
+  <div class="modal-content" style="max-width: 500px;">
+    <div class="modal-header">
+      <div class="modal-title">Add New AI Provider</div>
+      <button class="close-btn" onclick="closeProviderModal()">&times;</button>
+    </div>
+    <div class="cred-field">
+      <label>Search Providers</label>
+      <input id="providerSearchInput" type="text" class="styled-select" placeholder="Search OpenAI, Claude, Gemini..." oninput="filterProviderTypes()" />
+    </div>
+    <div class="cred-field">
+      <label>Provider Type</label>
+      <select id="providerTypeSelect" class="styled-select">
+        <option value="openai">OpenAI / ChatGPT</option>
+        <option value="anthropic">Anthropic Claude</option>
+        <option value="gemini">Google Gemini</option>
+        <option value="github">GitHub Models API Hub</option>
+        <option value="groq">Groq Cloud System</option>
+        <option value="other">Other Provider</option>
+      </select>
+    </div>
+    <div class="cred-field">
+      <label>API Key</label>
+      <input id="providerApiKeyInput" type="text" class="styled-select" placeholder="Enter provider API key" />
+    </div>
+    <div class="cred-field">
+      <label>Provider Name</label>
+      <input id="providerNameInput" type="text" class="styled-select" placeholder="My OpenAI Key" />
+    </div>
+    <div class="cred-field">
+      <label>Test and Save Provider</label>
+      <button class="action-btn" type="button" onclick="saveNewProvider()">Save Provider</button>
+      <span id="providerModalStatus" style="font-size: 12px; color: var(--muted);">Saved provider keys are stored locally and synced to Firebase if available.</span>
+    </div>
+    <div class="cred-field" style="margin-top: 10px;">
+      <div style="font-size: 12px; color: var(--muted);">Adding a provider will also allow selecting provider-specific models in the model dropdown. Reload the page after saving if you need to refresh provider lists.</div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
+  import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+  // Core Operational States
+  let dynamicCalculatedHTML = "";
+  let paneResizingState = false;
+  let isRequestProcessing = false;
+  let editModeDirty = false;
+  let currentSelectedEditable = null;
+  let generationProgressInterval = null;
+  let generationProgressValue = 0;
+  const generationTips = [
+    'You can change the colors with one prompt.',
+    'Need a modern section? Ask for a hero, features, or testimonials.',
+    'Want a site faster? Ask for responsive mobile-ready layouts.',
+    'You can improve readability by asking for clearer typography.',
+    'Try asking for dark mode, minimalist, or business website themes.',
+    'Need a new page? Ask for pricing, about, or contact sections.'
+  ];
+  
+  // Tracking allocations metrics
+  let totalSentMessagesCounter = 0;
+  let maxConfiguredMessageLimit = 20;
+  let userAlertHasBeenTriggered = false;
+
+  const DAILY_CREDIT_STORE = "scribbleaiDailyCreditState";
+  const DAY_MESSAGE_CAP = 20;
+  const DAILY_CREDIT_MAX = 20;
+  const DAILY_CREDIT_COST_BASE = 0.5;
+  const ALLOCATION_LIMIT_STORE = "scribbleaiAllocationLimit";
+  const PROJECTS_MANIFEST_KEY = "scribbleai_projects_manifest";
+  const ACTIVE_PROJECT_ID_KEY = "scribbleai_current_active_project_id";
+  const ACTIVE_PROJECT_VERSION_KEY = "scribbleai_current_active_version_id";
+  const ACTIVE_PROJECT_TITLE_KEY = "scribbleai_current_active_title";
+  const ACTIVE_PROJECT_CODE_KEY = "scribbleai_current_active_code";
+  const ACTIVE_PROJECT_PROMPT_KEY = "scribbleai_current_active_prompt";
+  const ACTIVE_PROJECT_ATTACHMENTS_KEY = "scribbleai_current_active_attachments";
+  let activeProjectAttachments = [];
+
+  // Production Worker Endpoint Router Location
+  const CLOUDFLARE_WORKER_ENDPOINT = "https://scribbleai.imcrabfr.workers.dev";
+
+  const BUILTIN_PROVIDER_MODELS = {
+    github: [
+      { name: "GPT-4o Production [Standard]", value: "gpt-4o" },
+      { name: "DeepSeek R1 [Reasoning Framework]", value: "DeepSeek-R1" }
+    ],
+    groq: [
+      { name: "Llama 3.3 70B [Ultra Speed]", value: "llama-3.3-70b-versatile" },
+      { name: "DeepSeek R1 Distill 70B", value: "deepseek-r1-distill-llama-70b" }
+    ],
+    openai: [
+      { name: "GPT-4o", value: "gpt-4o" },
+      { name: "GPT-4o Mini", value: "gpt-4o-mini" },
+      { name: "GPT-3.5 Turbo", value: "gpt-3.5-turbo" },
+      { name: "GPT-3.5 Turbo-16k", value: "gpt-3.5-turbo-16k" }
+    ],
+    anthropic: [
+      { name: "Claude 3.0 Pro", value: "claude-3.0-pro" },
+      { name: "Claude 3.0 Instant", value: "claude-3.0-instant" }
+    ],
+    gemini: [
+      { name: "Gemini Flash", value: "gemini-3.0-flash" },
+      { name: "Gemini Pro", value: "gemini-3.0-pro" },
+      { name: "Gemini Thinking", value: "gemini-3.0-thinking" }
+    ]
+  };
+
+  const LOCAL_PROVIDER_STORE = "scribbleai_custom_providers";
+  const FIREBASE_CONFIG = {
+    apiKey: "AIzaSyD5xI8GOG1lEKXBCunwq6qekg3QQOSijZ8",
+    authDomain: "sitedropio.firebaseapp.com",
+    databaseURL: "https://sitedropio-default-rtdb.firebaseio.com",
+    projectId: "sitedropio",
+    storageBucket: "sitedropio.firebasestorage.app",
+    messagingSenderId: "950561906473",
+    appId: "1:950561906473:web:45822a85f188c28b20e138",
+    measurementId: "G-BY119K5RS2"
+  };
+
+  const firebaseApp = initializeApp(FIREBASE_CONFIG);
+  const firebaseAnalytics = getAnalytics(firebaseApp);
+  const firebaseDatabase = getDatabase(firebaseApp);
+
+  function loadCustomProviders() {
+    return loadPersistedStorage(LOCAL_PROVIDER_STORE, []);
+  }
+
+  function saveCustomProviders(providers) {
+    persistStorage(LOCAL_PROVIDER_STORE, providers);
+  }
+
+  function getCustomProviderById(providerId) {
+    return loadCustomProviders().find(provider => provider.id === providerId);
+  }
+
+  function getProviderModels(providerId) {
+    if (providerId.startsWith('custom_')) {
+      const provider = getCustomProviderById(providerId);
+      return provider ? BUILTIN_PROVIDER_MODELS[provider.type] || [] : [];
+    }
+    return BUILTIN_PROVIDER_MODELS[providerId] || [];
+  }
+
+  function getProviderType(providerId) {
+    if (providerId.startsWith('custom_')) {
+      const provider = getCustomProviderById(providerId);
+      return provider ? provider.type : 'openai';
+    }
+    return providerId;
+  }
+
+  function getProviderDisplayName(providerId) {
+    if (providerId.startsWith('custom_')) {
+      const provider = getCustomProviderById(providerId);
+      return provider ? provider.name : 'Unknown Provider';
+    }
+    return providerId === 'github' ? 'GitHub Models API Hub' : providerId === 'groq' ? 'Groq Cloud System' : providerId === 'openai' ? 'OpenAI / ChatGPT' : providerId === 'anthropic' ? 'Anthropic Claude' : providerId === 'gemini' ? 'Google Gemini' : providerId;
+  }
+
+  function addProviderOptionToDropdown(provider) {
+    const select = document.getElementById('providerSelect');
+    if (!select) return;
+    const option = document.createElement('option');
+    option.value = provider.id;
+    option.textContent = `${provider.name} (${provider.type})`;
+    select.appendChild(option);
+  }
+
+  function populateCustomProviders() {
+    const providers = loadCustomProviders();
+    const select = document.getElementById('providerSelect');
+    if (!select) return;
+    const existingCustom = Array.from(select.options).filter(o => o.value.startsWith('custom_'));
+    existingCustom.forEach(option => option.remove());
+    providers.forEach(addProviderOptionToDropdown);
+  }
+
+  function persistProviderKeyToFirebase(provider) {
+    try {
+      const dbRef = ref(firebaseDatabase, `providers/${provider.id}`);
+      set(dbRef, provider);
+    } catch (error) {
+      console.warn('Firebase save failed:', error);
+    }
+  }
+
+  function updateProviderGuidance() {
+    const activeProvider = document.getElementById('providerSelect').value;
+    const guidanceBox = document.getElementById('providerGuidanceBox');
+    const apiKeyRow = document.getElementById('providerApiKeyRow');
+    if (apiKeyRow) apiKeyRow.style.display = 'none';
+
+    const providerType = getProviderType(activeProvider);
+    if (activeProvider.startsWith('custom_')) {
+      guidanceBox.innerHTML = `
+        <strong>${getProviderDisplayName(activeProvider)}</strong><br>
+        Use the configured API key for this provider in the backend. Select a supported model from the list and ensure the worker or cloud backend is mapped to <code>${providerType}</code>.
+      `;
+      return;
+    }
+
+    if (providerType === 'groq') {
+      guidanceBox.innerHTML = 'Groq Cloud requires your Groq API credentials on the backend. Select a Groq engine from the list.';
+      return;
+    }
+
+    if (providerType === 'anthropic') {
+      guidanceBox.innerHTML = 'Anthropic Claude models require a backend token and model mapping. Select a Claude engine from the list.';
+      return;
+    }
+
+    if (providerType === 'gemini') {
+      guidanceBox.innerHTML = 'Google Gemini models require backend support and a valid provider key. Choose a Gemini engine from the list.';
+      return;
+    }
+
+    if (providerType === 'other') {
+      guidanceBox.innerHTML = 'Other providers are supported through custom provider configuration. Save a provider and use your backend to map the key to the chosen model.';
+      return;
+    }
+
+    guidanceBox.innerHTML = 'Select a provider and model. Custom providers store their configuration locally and sync the provider record to Firebase.';
+  }
+
+  maxConfiguredMessageLimit = loadPersistedStorage(ALLOCATION_LIMIT_STORE, 20);
+
+  // Conversation memory channels
+  let compilationMemory = [
+    { role: "system", content: "You are an elite frontend engineer. Return ONLY valid standalone HTML files. Do not use emoji characters or external image assets. USE Tailwind CSS for styling. Make the style feel modern and responsive. The HTML should be a single, complete file ALWAYS. DO NOT use any external resources or image assets." }
+  ];
+
+  function loadPersistedStorage(key, alternative) {
+    try { const value = localStorage.getItem(key); if (value) return JSON.parse(value); } catch(e){}
+    return JSON.parse(JSON.stringify(alternative));
+  }
+  function persistStorage(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
+
+  function getTodayKey() {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+  }
+
+  function getMidnightTimestamp() {
+    const next = new Date();
+    next.setHours(24, 0, 0, 0);
+    return next.getTime();
+  }
+
+  function loadDailyCreditState() {
+    const today = getTodayKey();
+    let state = loadPersistedStorage(DAILY_CREDIT_STORE, null);
+    if (!state || state.date !== today) {
+      state = {
+        date: today,
+        creditsRemaining: DAILY_CREDIT_MAX,
+        totalUsedCredits: 0,
+        messagesUsed: 0,
+        resetAt: getMidnightTimestamp()
+      };
+      persistStorage(DAILY_CREDIT_STORE, state);
+    }
+    if (!state.resetAt) state.resetAt = getMidnightTimestamp();
+    return state;
+  }
+
+  function persistDailyCreditState(state) {
+    persistStorage(DAILY_CREDIT_STORE, state);
+  }
+
+  function calculateCreditCost(tokenCount) {
+    if (!tokenCount || tokenCount <= 0) return DAILY_CREDIT_COST_BASE;
+    const extraSteps = Math.floor(tokenCount / 1500);
+    return Math.min(DAILY_CREDIT_MAX, DAILY_CREDIT_COST_BASE + extraSteps * 0.5);
+  }
+
+  function updateResetTimer() {
+    if (!dailyCreditState) return;
+    const now = Date.now();
+    if (now >= dailyCreditState.resetAt) {
+      dailyCreditState = {
+        date: getTodayKey(),
+        creditsRemaining: DAILY_CREDIT_MAX,
+        totalUsedCredits: 0,
+        messagesUsed: 0,
+        resetAt: getMidnightTimestamp()
+      };
+      persistDailyCreditState(dailyCreditState);
+    }
+    refreshCounterDisplayLabel();
+  }
+
+  function startDailyResetTimer() {
+    setInterval(updateResetTimer, 1000);
+  }
+
+  let dailyCreditState = loadDailyCreditState();
+
+  function getResetCountdownText() {
+    const remainingMs = Math.max(0, dailyCreditState.resetAt - Date.now());
+    const hours = String(Math.floor(remainingMs / 3600000)).padStart(2, '0');
+    const minutes = String(Math.floor((remainingMs % 3600000) / 60000)).padStart(2, '0');
+    const seconds = String(Math.floor((remainingMs % 60000) / 1000)).padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
+  function getActiveAttachmentsFromStorage() {
+    return loadPersistedStorage(ACTIVE_PROJECT_ATTACHMENTS_KEY, []);
+  }
+
+  function persistCurrentAttachments() {
+    persistStorage(ACTIVE_PROJECT_ATTACHMENTS_KEY, activeProjectAttachments);
+  }
+
+  function readFileAsDataURL(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handleAttachmentFiles(fileList) {
+    if (!fileList || !fileList.length) return;
+    const selectedFiles = Array.from(fileList);
+    const attachments = await Promise.all(selectedFiles.map(async (file) => ({
+      id: `att_${Date.now()}_${Math.random().toString(36).slice(2,8)}`,
+      name: file.name,
+      type: file.type || 'application/octet-stream',
+      size: file.size,
+      data: await readFileAsDataURL(file)
+    })));
+
+    activeProjectAttachments = [...activeProjectAttachments, ...attachments];
+    persistCurrentAttachments();
+    updateAttachmentListDisplay();
+    const uploadInput = document.getElementById('attachmentUpload');
+    if (uploadInput) uploadInput.value = '';
+  }
+
+  window.handleAttachmentFiles = handleAttachmentFiles;
+
+  window.removeAttachment = (attachmentId) => {
+    activeProjectAttachments = activeProjectAttachments.filter(a => a.id !== attachmentId);
+    persistCurrentAttachments();
+    updateAttachmentListDisplay();
+  };
+
+  function updateAttachmentListDisplay() {
+    const list = document.getElementById('attachmentList');
+    if (!list) return;
+    if (!activeProjectAttachments.length) {
+      list.innerHTML = '<div class="attachment-item" style="justify-content:center;">No attachments yet.</div>';
+      return;
+    }
+    list.innerHTML = activeProjectAttachments.map(att => `
+      <div class="attachment-item">
+        <div>
+          <strong>${att.name}</strong>
+          <div><span>${att.type || 'file'} · ${Math.round(att.size / 1024)} KB</span></div>
+        </div>
+        <button type="button" onclick="removeAttachment('${att.id}')">Remove</button>
+      </div>
+    `).join('');
+  }
+
+  function getProjectsManifest() {
+    const raw = loadPersistedStorage(PROJECTS_MANIFEST_KEY, []);
+    return raw.map(project => {
+      if (project && project.sourceCode && !Array.isArray(project.versions)) {
+        return {
+          id: project.id || `proj_${Date.now()}`,
+          name: project.name || "Generated Project Layout",
+          versions: [{
+            versionId: `ver_${Date.now()}`,
+            label: "Version 1",
+            timestamp: project.timestamp || new Date().toLocaleString(),
+            prompt: project.prompt || "Legacy imported project",
+            sourceCode: project.sourceCode
+          }]
+        };
+      }
+      return project;
+    });
+  }
+
+  function saveProjectsManifest(manifest) {
+    persistStorage(PROJECTS_MANIFEST_KEY, manifest);
+  }
+
+  // Resizable Split-Pane Functionality
+  const sidebarContainer = document.getElementById('sidebarContainer');
+  const splitResizer = document.getElementById('dragSplitResizer');
+
+  splitResizer.addEventListener('mousedown', (e) => {
+    paneResizingState = true;
+    splitResizer.classList.add('dragging');
+    document.body.style.cursor = 'col-resize';
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!paneResizingState) return;
+    const boundaryWidth = Math.max(280, Math.min(e.clientX, window.innerWidth - 320));
+    sidebarContainer.style.width = `${boundaryWidth}px`;
+    sidebarContainer.style.flex = 'none';
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (paneResizingState) {
+      paneResizingState = false;
+      splitResizer.classList.remove('dragging');
+      document.body.style.cursor = '';
+    }
+  });
+
+  // Theme & Appearance Layout Switches
+  window.toggleSettingsModal = (displayState) => {
+    document.getElementById('settingsModal').classList.toggle('active', displayState);
+  };
+
+  window.applyVisualConfigurations = () => {
+    const selectedTheme = document.getElementById('themeStyleSelect').value;
+    const selectedSizing = document.getElementById('textSizeSelect').value;
+    document.documentElement.setAttribute('data-theme', selectedTheme);
+
+    let variableSize = "12.5px";
+    if (selectedSizing === "small") variableSize = "11.5px";
+    if (selectedSizing === "large") variableSize = "14px";
+    document.documentElement.style.setProperty('--font-size-base', variableSize);
+  };
+
+  // Adjust Allocations Limits
+  window.updateMaxAllocationParameters = () => {
+    const sliderElement = document.getElementById('maxMessagesLimitSlider');
+    maxConfiguredMessageLimit = parseInt(sliderElement.value, 10);
+    document.getElementById('lblSliderLimitValue').textContent = `${maxConfiguredMessageLimit} Messages`;
+    persistStorage(ALLOCATION_LIMIT_STORE, maxConfiguredMessageLimit);
+    refreshCounterDisplayLabel();
+    
+    if (totalSentMessagesCounter < (maxConfiguredMessageLimit * 0.85)) {
+      userAlertHasBeenTriggered = false;
+    }
+  };
+
+  function refreshCounterDisplayLabel() {
+    const creditsText = dailyCreditState ? dailyCreditState.creditsRemaining.toFixed(1) : DAILY_CREDIT_MAX.toFixed(1);
+    const messagesText = dailyCreditState ? dailyCreditState.messagesUsed : 0;
+    document.getElementById('messageCounterLabel').textContent = `Credits: ${creditsText} / ${DAILY_CREDIT_MAX} · Messages: ${messagesText} / ${maxConfiguredMessageLimit}`;
+    document.getElementById('dailyResetLabel').textContent = `Resets in: ${getResetCountdownText()}`;
+    const submitBtn = document.getElementById('btnSubmitPrompt');
+    if (dailyCreditState && (dailyCreditState.messagesUsed >= maxConfiguredMessageLimit || dailyCreditState.creditsRemaining <= 0)) {
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.6';
+      submitBtn.style.pointerEvents = 'none';
+    } else {
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      submitBtn.style.pointerEvents = 'auto';
+    }
+  }
+
+  // Update the submit button label depending on whether a project exists
+  function updateSubmitButtonLabel() {
+    const labelEl = document.getElementById('submitBtnLabel');
+    if (!labelEl) return;
+    const activeCachedCode = localStorage.getItem('scribbleai_current_active_code');
+    labelEl.textContent = activeCachedCode ? 'Build Changes' : 'Build';
+  }
+
+  // Endpoint Engine Management
+  window.handleEndpointRotation = () => {
+    const activeProvider = document.getElementById('providerSelect').value;
+    const modelSelectionElement = document.getElementById('modelSelect');
+    modelSelectionElement.innerHTML = '';
+
+    const options = getProviderModels(activeProvider);
+    if (options.length === 0) {
+      const placeholder = document.createElement('option');
+      placeholder.textContent = 'No built-in models available for this provider.';
+      placeholder.value = '';
+      modelSelectionElement.appendChild(placeholder);
+    } else {
+      options.forEach(engine => {
+        const optionNode = document.createElement('option');
+        optionNode.value = engine.value;
+        optionNode.textContent = engine.name;
+        modelSelectionElement.appendChild(optionNode);
+      });
+    }
+
+    updateProviderGuidance();
+  };
+
+  function openProviderModal() {
+    const modal = document.getElementById('providerModal');
+    if (modal) modal.style.display = 'flex';
+  }
+
+  function closeProviderModal() {
+    const modal = document.getElementById('providerModal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  function filterProviderTypes() {
+    const query = document.getElementById('providerSearchInput').value.trim().toLowerCase();
+    const providerSelect = document.getElementById('providerTypeSelect');
+    if (!providerSelect) return;
+
+    for (const option of providerSelect.options) {
+      const text = option.textContent.toLowerCase();
+      option.style.display = query === '' || text.includes(query) ? 'block' : 'none';
+    }
+  }
+
+  function saveNewProvider() {
+    const providerType = document.getElementById('providerTypeSelect').value;
+    const providerName = document.getElementById('providerNameInput').value.trim();
+    const providerKey = document.getElementById('providerApiKeyInput').value.trim();
+    const statusLabel = document.getElementById('providerModalStatus');
+
+    if (!providerName || !providerKey) {
+      statusLabel.textContent = 'Enter a provider name and API key before saving.';
+      statusLabel.style.color = '#ff6b6b';
+      return;
+    }
+
+    const providerId = `custom_${Date.now()}`;
+    const provider = {
+      id: providerId,
+      name: providerName,
+      type: providerType,
+      apiKey: providerKey,
+      createdAt: new Date().toISOString()
+    };
+
+    const providers = loadCustomProviders();
+    providers.push(provider);
+    saveCustomProviders(providers);
+    persistProviderKeyToFirebase(provider);
+    addProviderOptionToDropdown(provider);
+
+    const providerSelect = document.getElementById('providerSelect');
+    if (providerSelect) {
+      providerSelect.value = provider.id;
+      handleEndpointRotation();
+    }
+
+    statusLabel.textContent = 'Provider saved locally and synced to Firebase.';
+    statusLabel.style.color = '#8be8a8';
+    setTimeout(() => {
+      closeProviderModal();
+      document.getElementById('providerNameInput').value = '';
+      document.getElementById('providerApiKeyInput').value = '';
+      document.getElementById('providerSearchInput').value = '';
+      document.getElementById('providerTypeSelect').value = 'openai';
+    }, 1200);
+  }
+
+  function showGenerationOverlay() {
+    const overlay = document.getElementById('generationOverlay');
+    const tip = document.getElementById('generationTipText');
+    const progressFill = document.getElementById('generationProgressFill');
+    const progressLabel = document.getElementById('generationProgressLabel');
+    if (!overlay || !tip || !progressFill || !progressLabel) return;
+
+    overlay.style.display = 'flex';
+    generationProgressValue = 0;
+    progressFill.style.width = '0%';
+    progressLabel.textContent = '0%';
+    let currentTipIndex = 0;
+    tip.textContent = generationTips[currentTipIndex];
+
+    generationProgressInterval = setInterval(() => {
+      generationProgressValue = Math.min(98, generationProgressValue + Math.random() * 8 + 4);
+      progressFill.style.width = `${Math.round(generationProgressValue)}%`;
+      progressLabel.textContent = `${Math.round(generationProgressValue)}%`;
+      if (generationProgressValue >= 80) {
+        currentTipIndex = (currentTipIndex + 1) % generationTips.length;
+        tip.textContent = generationTips[currentTipIndex];
+      }
+    }, 800);
+  }
+
+  function updateGenerationProgress(finalValue = 100) {
+    const progressFill = document.getElementById('generationProgressFill');
+    const progressLabel = document.getElementById('generationProgressLabel');
+    if (!progressFill || !progressLabel) return;
+    generationProgressValue = finalValue;
+    progressFill.style.width = `${finalValue}%`;
+    progressLabel.textContent = `${finalValue}%`;
+  }
+
+  function hideGenerationOverlay() {
+    clearInterval(generationProgressInterval);
+    generationProgressInterval = null;
+    const overlay = document.getElementById('generationOverlay');
+    if (!overlay) return;
+    overlay.style.display = 'none';
+  }
+
+  function connectEditFrameListeners() {
+    const editFrame = document.getElementById('editFrame');
+    const previewFrame = document.getElementById('previewFrame');
+    if (!editFrame || !previewFrame) return;
+    editFrame.onload = () => {
+      try {
+        const doc = editFrame.contentDocument || editFrame.contentWindow.document;
+        doc.body.style.cursor = 'pointer';
+        doc.body.addEventListener('click', (event) => {
+          event.preventDefault();
+          const target = event.target;
+          if (target && target !== doc.body && target !== doc.documentElement) {
+            selectEditableElement(target);
+          }
+        }, true);
+      } catch (e) {
+        console.warn('Edit frame listener could not attach.', e);
+      }
+    };
+    if (previewFrame.srcdoc) {
+      editFrame.srcdoc = previewFrame.srcdoc;
+    }
+  }
+
+  function selectEditableElement(element) {
+    currentSelectedEditable = element;
+    editModeDirty = true;
+    const label = document.getElementById('selectedElementLabel');
+    const textInput = document.getElementById('editTextInput');
+    const textColorInput = document.getElementById('editTextColor');
+    const bgColorInput = document.getElementById('editBackgroundColor');
+    const heightInput = document.getElementById('editHeightInput');
+    const transformInput = document.getElementById('editTransformInput');
+    if (label) label.textContent = element.tagName.toLowerCase();
+    if (textInput) textInput.value = element.textContent.trim();
+    if (textColorInput) textColorInput.value = rgbToHex(getComputedStyle(element).color) || '#ffffff';
+    if (bgColorInput) bgColorInput.value = rgbToHex(getComputedStyle(element).backgroundColor) || '#000000';
+    if (heightInput) heightInput.value = parseInt(getComputedStyle(element).height, 10) || '';
+    if (transformInput) transformInput.value = element.style.transform || '';
+  }
+
+  function rgbToHex(rgb) {
+    const result = /^rgba?\((\d+),\s*(\d+),\s*(\d+)/i.exec(rgb);
+    return result ? `#${((1 << 24) + (parseInt(result[1]) << 16) + (parseInt(result[2]) << 8) + parseInt(result[3])).toString(16).slice(1)}` : '#ffffff';
+  }
+
+  function saveEditChanges() {
+    if (!currentSelectedEditable) return;
+    const textInput = document.getElementById('editTextInput');
+    const textColorInput = document.getElementById('editTextColor');
+    const bgColorInput = document.getElementById('editBackgroundColor');
+    const heightInput = document.getElementById('editHeightInput');
+    const transformInput = document.getElementById('editTransformInput');
+    if (textInput) currentSelectedEditable.textContent = textInput.value;
+    if (textColorInput) currentSelectedEditable.style.color = textColorInput.value;
+    if (bgColorInput) currentSelectedEditable.style.backgroundColor = bgColorInput.value;
+    if (heightInput) currentSelectedEditable.style.height = heightInput.value ? `${heightInput.value}px` : 'auto';
+    if (transformInput) currentSelectedEditable.style.transform = transformInput.value;
+    editModeDirty = true;
+  }
+
+  function resetEditSelection() {
+    currentSelectedEditable = null;
+    editModeDirty = false;
+    document.getElementById('selectedElementLabel').textContent = 'None selected';
+    ['editTextInput','editTextColor','editBackgroundColor','editHeightInput','editTransformInput'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+  }
+
+  function openDiscardModal(nextTab) {
+    const modal = document.getElementById('discardConfirmationModal');
+    if (!modal) return;
+    modal.classList.add('active');
+    modal.dataset.nextTab = nextTab;
+  }
+
+  function closeDiscardModal(confirmDiscard) {
+    const modal = document.getElementById('discardConfirmationModal');
+    if (!modal) return;
+    const nextTab = modal.dataset.nextTab;
+    modal.classList.remove('active');
+    if (confirmDiscard && nextTab) {
+      editModeDirty = false;
+      resetEditSelection();
+      window.toggleCanvasTab(nextTab);
+    }
+  }
+
+  window.toggleCanvasTab = (activeTabTarget) => {
+    if (activeTabTarget !== 'edit' && editModeDirty) {
+      openDiscardModal(activeTabTarget);
+      return;
+    }
+
+    document.getElementById('btnTabPreview').classList.toggle('active', activeTabTarget === 'preview');
+    document.getElementById('btnTabCode').classList.toggle('active', activeTabTarget === 'code');
+    document.getElementById('btnTabEdit')?.classList.toggle('active', activeTabTarget === 'edit');
+    document.getElementById('layerPreview').classList.toggle('active', activeTabTarget === 'preview');
+    document.getElementById('layerCode').classList.toggle('active', activeTabTarget === 'code');
+    document.getElementById('layerEdit').classList.toggle('active', activeTabTarget === 'edit');
+
+    if (activeTabTarget === 'edit') {
+      const editFrame = document.getElementById('editFrame');
+      const previewFrame = document.getElementById('previewFrame');
+      if (previewFrame && editFrame) {
+        editFrame.srcdoc = previewFrame.srcdoc || '<div style="padding:24px;color:#fff;">No preview content to edit yet.</div>';
+        connectEditFrameListeners();
+      }
+    }
+  };
+
+  window.setCanvasViewport = (dimensionsPreset) => {
+    ['desktop', 'tablet', 'phone'].forEach(p => {
+      document.getElementById(`preset${p.charAt(0).toUpperCase() + p.slice(1)}`).classList.remove('active');
+      document.getElementById('viewportWrapper').classList.remove(`preset-${p}`);
+    });
+    document.getElementById(`preset${dimensionsPreset.charAt(0).toUpperCase() + dimensionsPreset.slice(1)}`).classList.add('active');
+    document.getElementById('viewportWrapper').classList.add(`preset-${dimensionsPreset}`);
+  };
+
+  // Execution Processing Handles
+  window.handlePromptSubmission = async () => {
+    if (isRequestProcessing) return;
+
+    const inputElement = document.getElementById('workspaceInput');
+    const promptValueText = inputElement.value.trim();
+    if (!promptValueText) return;
+
+    if (!dailyCreditState) dailyCreditState = loadDailyCreditState();
+    if (dailyCreditState.messagesUsed >= maxConfiguredMessageLimit || dailyCreditState.creditsRemaining <= 0) {
+      alert('Daily AI access blocked: You have used all available daily messages or credits. Please wait until your credits reset.');
+      refreshCounterDisplayLabel();
+      return;
+    }
+
+    inputElement.value = "";
+    showGenerationOverlay();
+    totalSentMessagesCounter++;
+    dailyCreditState.messagesUsed += 1;
+    dailyCreditState.creditsRemaining = Math.max(0, dailyCreditState.creditsRemaining - DAILY_CREDIT_COST_BASE);
+    dailyCreditState.totalUsedCredits += DAILY_CREDIT_COST_BASE;
+    persistDailyCreditState(dailyCreditState);
+    refreshCounterDisplayLabel();
+
+    if (!userAlertHasBeenTriggered && dailyCreditState.messagesUsed >= (maxConfiguredMessageLimit * 0.85)) {
+      userAlertHasBeenTriggered = true;
+      alert(`Operational Warning: You are approaching your maximum daily message limit. You have used ${dailyCreditState.messagesUsed} out of ${maxConfiguredMessageLimit} messages, and ${dailyCreditState.creditsRemaining.toFixed(1)} credits remain.`);
+    }
+
+    await launchSystemBuildPipeline(promptValueText);
+  };
+
+  // System Core Code Construction Compilation Path
+  async function launchSystemBuildPipeline(userInstructionPrompt) {
+    const globalLoaderOverlay = document.getElementById('globalWorkspaceLoader');
+    const selectedProviderHub = document.getElementById('providerSelect').value;
+    const selectedEngineTarget = document.getElementById('modelSelect').value;
+
+    globalLoaderOverlay.classList.add('active');
+    document.getElementById('agentLoaderMessage').textContent = "Assembling framework layout matrix elements...";
+    postMessageToContainer('user', userInstructionPrompt);
+
+    try {
+      compilationMemory.push({ role: "user", content: userInstructionPrompt });
+
+      // REPLACE THIS URL WITH YOUR ACTUAL CLOUDFLARE WORKER ROUTE:
+      const cloudflareWorkerEndpoint = CLOUDFLARE_WORKER_ENDPOINT;
+
+      const networkCompilationStream = await fetch(cloudflareWorkerEndpoint, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({ 
+          provider: selectedProviderHub, // "github" or "groq"
+          model: selectedEngineTarget, 
+          messages: compilationMemory, 
+          temperature: 0.25 
+        })
+      });
+
+      if (!networkCompilationStream.ok) {
+        const errorText = await networkCompilationStream.text();
+        throw new Error(`Edge node framework returned processing errors: ${networkCompilationStream.status} - ${errorText}`);
+      }
+      
+      const dataPayloadJson = await networkCompilationStream.json();
+      const coreResponseProseText = dataPayloadJson.choices[0].message.content;
+      
+      // Clean structure block boundaries safely
+      const codeMarkdownRegexMatch = /```html([\s\S]*?)```/i.exec(coreResponseProseText);
+      dynamicCalculatedHTML = codeMarkdownRegexMatch ? codeMarkdownRegexMatch[1].trim() : coreResponseProseText.trim();
+
+      // Refresh layout sandbox elements smoothly
+      document.getElementById('previewFrame').srcdoc = dynamicCalculatedHTML;
+      document.getElementById('codeAreaView').value = dynamicCalculatedHTML;
+
+      compilationMemory.push({ role: "assistant", content: coreResponseProseText });
+
+      // 1. DYNAMIC CUSTOM SENTENCE LOGIC:
+      // Strip markdown code backticks blocks to cleanly extract the short status text summary sentence provided by the AI model.
+      let customSentenceSummary = coreResponseProseText.replace(/```html[\s\S]*?```/gi, '').replace(/```[\s\S]*?```/gi, '').trim();
+      if (!customSentenceSummary || customSentenceSummary.length < 5) {
+        customSentenceSummary = "Canvas layouts refreshed; generated modern components successfully via structural synthesis paths.";
+      } else if (customSentenceSummary.length > 180) {
+        customSentenceSummary = customSentenceSummary.substring(0, 177) + "...";
+      }
+
+      postMessageToContainer('assistant', customSentenceSummary);
+      
+      // 2. AUTOMATIC LOCALSTORAGE PROJECT PERSISTENCE PIPELINE:
+      saveActiveProjectToLocalStorage(userInstructionPrompt, dynamicCalculatedHTML);
+
+      const buildSummaryMessage = createBuildCompletionSummary(
+        userInstructionPrompt,
+        selectedProviderHub,
+        selectedEngineTarget,
+        dynamicCalculatedHTML
+      );
+      postMessageToContainer('assistant', buildSummaryMessage);
+
+      if (dataPayloadJson.usage) {
+        const tokenCount = dataPayloadJson.usage.total_tokens || 0;
+        document.getElementById('lblLastTokens').textContent = tokenCount;
+        const exactCost = calculateCreditCost(tokenCount);
+        const extraCost = Math.max(0, exactCost - DAILY_CREDIT_COST_BASE);
+        if (extraCost > 0 && dailyCreditState) {
+          dailyCreditState.creditsRemaining = Math.max(0, dailyCreditState.creditsRemaining - extraCost);
+          dailyCreditState.totalUsedCredits += extraCost;
+          persistDailyCreditState(dailyCreditState);
+          refreshCounterDisplayLabel();
+          postMessageToContainer('assistant', `Credit adjustment applied: ${exactCost.toFixed(1)} credits used for this request based on ${tokenCount} token usage.`);
+        }
+      }
+
+    } catch (compilationError) {
+      postMessageToContainer('assistant', `Compilation Processing Aborted: ${compilationError.message}`);
+    } finally {
+      globalLoaderOverlay.classList.remove('active');
+      updateGenerationProgress(100);
+      setTimeout(hideGenerationOverlay, 900);
+    }
+  }
+
+  function createBuildCompletionSummary(userPrompt, providerName, engineName, htmlPayload) {
+    const promptTitle = userPrompt.trim().replace(/\s+/g, ' ');
+    const trimmedPrompt = promptTitle.length > 90 ? `${promptTitle.substring(0, 87)}...` : promptTitle;
+
+    return `Build complete from prompt: "${trimmedPrompt}".\n\nWhat it made: a fully assembled HTML layout matching your request, including the page structure, sections, and content blocks required for the chosen site type.\n\nHow it works: the generated HTML is rendered in the live preview and exposed in the code tab; it is also saved as a versioned project in LocalStorage so you can continue editing later.\n\nWhat it used: the ${providerName} provider with the ${engineName} engine, plus the AI build pipeline to synthesize HTML directly from your prompt.`;
+  }
+
+  function postMessageToContainer(roleDesignation, blockMessageCopy) {
+    const historicalContainerBox = document.getElementById('chatHistory');
+    const dynamicMessageCard = document.createElement('div');
+    dynamicMessageCard.className = `message ${roleDesignation}`;
+    dynamicMessageCard.innerHTML = blockMessageCopy.replace(/\n/g, '<br>');
+    historicalContainerBox.appendChild(dynamicMessageCard);
+    historicalContainerBox.scrollTop = historicalContainerBox.scrollHeight;
+  }
+
+  // Local Storage Pipeline for individual project compilation states
+  function saveActiveProjectToLocalStorage(userPromptIntent, htmlPayload) {
+    try {
+      const registeredProjects = getProjectsManifest();
+      const activeProjectId = localStorage.getItem(ACTIVE_PROJECT_ID_KEY);
+      const versionId = `ver_${Date.now()}`;
+      const existingProjectIndex = registeredProjects.findIndex(p => p.id === activeProjectId);
+
+      const derivedName = userPromptIntent.split(/[.?!,]/)[0].substring(0, 35).trim() || "Generated Project Layout";
+      let projectName = derivedName;
+      if (existingProjectIndex !== -1 && registeredProjects[existingProjectIndex].name) {
+        projectName = registeredProjects[existingProjectIndex].name;
+      }
+
+      const versionObject = {
+        versionId,
+        label: `Version ${existingProjectIndex === -1 ? 1 : registeredProjects[existingProjectIndex].versions.length + 1}`,
+        timestamp: new Date().toLocaleString(),
+        prompt: userPromptIntent,
+        sourceCode: htmlPayload,
+        attachments: activeProjectAttachments
+      };
+
+      let activeProjectIdToSave = activeProjectId;
+      if (existingProjectIndex !== -1) {
+        registeredProjects[existingProjectIndex].versions.unshift(versionObject);
+      } else {
+        activeProjectIdToSave = `proj_${Date.now()}`;
+        registeredProjects.unshift({
+          id: activeProjectIdToSave,
+          name: projectName,
+          versions: [versionObject]
+        });
+      }
+
+      saveProjectsManifest(registeredProjects);
+
+      localStorage.setItem(ACTIVE_PROJECT_ID_KEY, activeProjectIdToSave);
+      localStorage.setItem(ACTIVE_PROJECT_VERSION_KEY, versionId);
+      localStorage.setItem(ACTIVE_PROJECT_CODE_KEY, htmlPayload);
+      localStorage.setItem(ACTIVE_PROJECT_TITLE_KEY, projectName);
+      localStorage.setItem(ACTIVE_PROJECT_PROMPT_KEY, userPromptIntent);
+      updateSubmitButtonLabel();
+    } catch (err) {
+      console.error("Local project persistence error encountered:", err);
+    }
+  }
+
+  // Check if a specific project was loaded from projects.html to run inside the frame layout
+  function verifyActiveSessionLoadingState() {
+    const activeCachedCode = localStorage.getItem(ACTIVE_PROJECT_CODE_KEY);
+    const activeProjectTitle = localStorage.getItem(ACTIVE_PROJECT_TITLE_KEY);
+    const activeProjectVersionId = localStorage.getItem(ACTIVE_PROJECT_VERSION_KEY);
+    const activeProjectPrompt = localStorage.getItem(ACTIVE_PROJECT_PROMPT_KEY);
+
+    if (activeCachedCode) {
+      dynamicCalculatedHTML = activeCachedCode;
+      document.getElementById('previewFrame').srcdoc = dynamicCalculatedHTML;
+      document.getElementById('codeAreaView').value = dynamicCalculatedHTML;
+      document.getElementById('lblActiveNode').textContent = activeProjectTitle || "ScribbleAI";
+      activeProjectAttachments = getActiveAttachmentsFromStorage();
+      updateAttachmentListDisplay();
+      
+      const currentTitle = activeProjectTitle || "Loaded Workspace";
+      postMessageToContainer('assistant', `Loaded external project: "<strong>${currentTitle}</strong>" successfully into the preview viewport memory workspace layout matrix.`);
+
+      compilationMemory.push({
+        role: "assistant",
+        content: `The active project version ${activeProjectVersionId || ''} has been loaded. Use the current HTML below as the starting point for all further requested edits.`
+      });
+
+      if (activeProjectPrompt) {
+        compilationMemory.push({
+          role: "assistant",
+          content: `Previous prompt for this version: ${activeProjectPrompt}`
+        });
+      }
+
+      compilationMemory.push({
+        role: "assistant",
+        content: `Current HTML start state:\n\n${activeCachedCode}`
+      });
+
+      updateSubmitButtonLabel();
+    }
+  }
+
+  function getQueryParam(name) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(name);
+  }
+
+  function maybeAutoStartFromQuery() {
+    const prompt = getQueryParam('prompt');
+    const isNew = getQueryParam('new');
+    if (isNew) {
+      localStorage.removeItem(ACTIVE_PROJECT_ID_KEY);
+      localStorage.removeItem(ACTIVE_PROJECT_VERSION_KEY);
+      localStorage.removeItem(ACTIVE_PROJECT_PROMPT_KEY);
+      localStorage.removeItem(ACTIVE_PROJECT_TITLE_KEY);
+      localStorage.removeItem(ACTIVE_PROJECT_CODE_KEY);
+      localStorage.removeItem(ACTIVE_PROJECT_ATTACHMENTS_KEY);
+      activeProjectAttachments = [];
+      updateAttachmentListDisplay();
+      dynamicCalculatedHTML = "";
+      document.getElementById('previewFrame').srcdoc = "";
+      document.getElementById('codeAreaView').value = "";
+    }
+    if (prompt) {
+      const inputElement = document.getElementById('workspaceInput');
+      if (inputElement) {
+        inputElement.value = prompt;
+      }
+      setTimeout(() => {
+        if (prompt && inputElement && inputElement.value.trim()) {
+          handlePromptSubmission();
+        }
+      }, 140);
+    }
+  }
+
+  window.triggerCodeDownload = () => {
+    if (!dynamicCalculatedHTML) return alert("Compile application layouts first.");
+    const formattingBlob = new Blob([dynamicCalculatedHTML], { type: "text/html" });
+    const virtualLinkElement = document.createElement("a");
+    virtualLinkElement.href = URL.createObjectURL(formattingBlob);
+    virtualLinkElement.download = "scribbleai-compiled-workspace.html";
+    document.body.appendChild(virtualLinkElement);
+    virtualLinkElement.click();
+    document.body.removeChild(virtualLinkElement);
+  };
+
+  // Run Initialization Sequences
+  document.getElementById('maxMessagesLimitSlider').value = maxConfiguredMessageLimit;
+  document.getElementById('lblSliderLimitValue').textContent = `${maxConfiguredMessageLimit} Messages`;
+  refreshCounterDisplayLabel();
+  startDailyResetTimer();
+  
+  populateCustomProviders();
+  window.handleEndpointRotation();
+  window.applyVisualConfigurations();
+  verifyActiveSessionLoadingState();
+  maybeAutoStartFromQuery();
+  updateSubmitButtonLabel();
+</script>
+</body>
+</html>
